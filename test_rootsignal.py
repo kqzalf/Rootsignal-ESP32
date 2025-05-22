@@ -1,4 +1,8 @@
-# test_rootsignal.py
+"""Unit tests for RootSignal-ESP32.
+
+This module contains test cases for the core functionality of the RootSignal-ESP32
+system, including configuration loading, network scanning, and anomaly detection.
+"""
 import unittest
 from unittest.mock import patch, MagicMock
 import ujson
@@ -6,7 +10,10 @@ import utils
 import wifi_scan
 
 class TestRootSignal(unittest.TestCase):
+    """Test cases for RootSignal-ESP32 functionality."""
+    
     def setUp(self):
+        """Set up test fixtures."""
         # Mock config data
         self.mock_config = {
             'slack_webhook': 'https://hooks.slack.com/test',
@@ -24,12 +31,16 @@ class TestRootSignal(unittest.TestCase):
 
     @patch('builtins.open')
     def test_load_config(self, mock_open):
-        mock_open.return_value.__enter__.return_value.read.return_value = ujson.dumps(self.mock_config)
+        """Test configuration loading from file."""
+        mock_open.return_value.__enter__.return_value.read.return_value = (
+            ujson.dumps(self.mock_config)
+        )
         config = utils.load_config()
         self.assertEqual(config, self.mock_config)
 
     @patch('urequests.post')
     def test_send_slack_alert(self, mock_post):
+        """Test sending alerts to Slack."""
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_post.return_value = mock_response
@@ -39,24 +50,32 @@ class TestRootSignal(unittest.TestCase):
             'details': 'Test details'
         }
         
-        utils.send_slack_alert(self.mock_config['slack_webhook'], 
-                             self.mock_config['system_name'], 
-                             anomaly)
+        utils.send_slack_alert(
+            self.mock_config['slack_webhook'],
+            self.mock_config['system_name'],
+            anomaly
+        )
         
         mock_post.assert_called_once()
 
     def test_detect_anomalies(self):
+        """Test anomaly detection functionality."""
         # Test weak signal detection
         anomalies = wifi_scan.detect_anomalies(self.mock_networks, -80)
-        self.assertTrue(any(a['type'] == 'Weak Signal Detected' for a in anomalies))
+        self.assertTrue(
+            any(a['type'] == 'Weak Signal Detected' for a in anomalies)
+        )
         
         # Test MAC flood detection
         many_networks = self.mock_networks * 30  # Create 60 networks
         anomalies = wifi_scan.detect_anomalies(many_networks, -80)
-        self.assertTrue(any(a['type'] == 'Possible MAC Flood' for a in anomalies))
+        self.assertTrue(
+            any(a['type'] == 'Possible MAC Flood' for a in anomalies)
+        )
 
     @patch('network.WLAN')
     def test_scan_networks(self, mock_wlan):
+        """Test WiFi network scanning."""
         mock_wlan.return_value.scan.return_value = self.mock_networks
         networks = wifi_scan.scan_networks()
         self.assertEqual(len(networks), 2)

@@ -1,11 +1,24 @@
 # main.py
+"""Main entry point for RootSignal-ESP32.
+
+This module initializes the WiFi security monitoring system and runs the main
+monitoring loop that scans for networks and detects anomalies.
+"""
 import time
 import gc
 import machine
 import wifi_scan
 import utils
 
-def main():
+def main() -> None:
+    """Run the main monitoring loop.
+    
+    This function:
+    1. Loads configuration
+    2. Connects to WiFi
+    3. Continuously scans for networks and anomalies
+    4. Sends alerts when anomalies are detected
+    """
     try:
         # Load configuration
         config = utils.load_config()
@@ -29,8 +42,12 @@ def main():
                 # Send alerts for any anomalies
                 for anomaly in anomalies:
                     try:
-                        utils.send_slack_alert(config['slack_webhook'], config['system_name'], anomaly)
-                    except Exception as e:
+                        utils.send_slack_alert(
+                            config['slack_webhook'],
+                            config['system_name'],
+                            anomaly
+                        )
+                    except ConnectionError as e:
                         print(f"Failed to send alert: {e}")
                 
                 # Memory cleanup

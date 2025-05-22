@@ -1,25 +1,43 @@
-# utils.py
+"""Utility functions for RootSignal-ESP32.
+
+This module provides core functionality for configuration management,
+WiFi connectivity, and Slack alert integration.
+"""
+import gc
+import time
 import network
 import ujson
 import urequests
-import gc
-import time
-from machine import Pin
+from machine import Pin  # noqa: F401
 
 CONFIG_FILE = 'config.json'
 LOG_FILE = 'log.txt'
 
-def log_error(error_msg):
+def log_error(error_msg: str) -> None:
+    """Log an error message to the log file with timestamp.
+    
+    Args:
+        error_msg: The error message to log
+    """
     try:
-        with open(LOG_FILE, 'a') as f:
+        with open(LOG_FILE, 'a', encoding='utf-8') as f:
             timestamp = time.localtime()
-            f.write(f"[{timestamp[0]}-{timestamp[1]}-{timestamp[2]} {timestamp[3]}:{timestamp[4]}:{timestamp[5]}] {error_msg}\n")
-    except:
-        print(f"Failed to write to log: {error_msg}")
+            f.write(f"[{timestamp[0]}-{timestamp[1]}-{timestamp[2]} "
+                   f"{timestamp[3]}:{timestamp[4]}:{timestamp[5]}] {error_msg}\n")
+    except Exception as e:
+        print(f"Failed to write to log: {error_msg} - {str(e)}")
 
-def load_config():
+def load_config() -> dict:
+    """Load configuration from config.json file.
+    
+    Returns:
+        dict: Configuration dictionary
+        
+    Raises:
+        Exception: If config file cannot be loaded or parsed
+    """
     try:
-        with open(CONFIG_FILE) as f:
+        with open(CONFIG_FILE, encoding='utf-8') as f:
             config = ujson.load(f)
             gc.collect()  # Clean up after file operations
             return config
@@ -28,7 +46,12 @@ def load_config():
         log_error(error_msg)
         raise
 
-def connect_to_wifi():
+def connect_to_wifi() -> None:
+    """Connect to WiFi network using credentials from config.
+    
+    Raises:
+        Exception: If WiFi connection fails or times out
+    """
     sta_if = network.WLAN(network.STA_IF)
     sta_if.active(True)
     if not sta_if.isconnected():
@@ -41,21 +64,31 @@ def connect_to_wifi():
                 time.sleep(1)
                 timeout += 1
             if not sta_if.isconnected():
-                raise Exception("WiFi connection timeout")
+                raise ConnectionError("WiFi connection timeout")
             print('Network config:', sta_if.ifconfig())
         except Exception as e:
             error_msg = f"WiFi connection error: {str(e)}"
             log_error(error_msg)
             raise
 
-def send_slack_alert(webhook_url, node, anomaly):
+def send_slack_alert(webhook_url: str, node: str, anomaly: dict) -> None:
+    """Send an alert to Slack about a detected anomaly.
+    
+    Args:
+        webhook_url: Slack webhook URL
+        node: Name of the monitoring node
+        anomaly: Dictionary containing anomaly details
+        
+    Raises:
+        Exception: If Slack API request fails
+    """
     try:
         message = {
-            'text': '*RootSignal Alert:* `%s` from `%s`\n> %s' % (anomaly['type'], node, anomaly['details'])
+            'text': f'*RootSignal Alert:* `{anomaly["type"]}` from `{node}`\n> {anomaly["details"]}'
         }
         response = urequests.post(webhook_url, json=message)
         if response.status_code != 200:
-            raise Exception(f"Slack API error: {response.status_code}")
+            raise ConnectionError(f"Slack API error: {response.status_code}")
         response.close()
         gc.collect()  # Clean up after network request
     except Exception as e:
