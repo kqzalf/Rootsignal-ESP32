@@ -1,0 +1,332 @@
+[MASTER]
+# Add MicroPython-specific modules to the Python path
+init-hook='import sys; sys.path.append(".")'
+
+[MESSAGES CONTROL]
+# Disable warnings about missing imports for MicroPython modules
+disable=C0111,  # missing-docstring
+        C0103,  # invalid-name
+        C0301,  # line-too-long
+        C0303,  # trailing-whitespace
+        C0304,  # missing-final-newline
+        C0411,  # wrong-import-order
+        E0401,  # import-error
+        W0611,  # unused-import
+        W0702,  # bare-except
+        W0703,  # broad-except
+        W1514,  # unspecified-encoding
+        W0718,  # broad-exception-caught
+        W0719,  # raising-too-general
+        C0209,  # consider-using-f-string
+        R0903,  # too-few-public-methods
+        R0913,  # too-many-arguments
+        R0914,  # too-many-locals
+        R0915,  # too-many-statements
+        R0912,  # too-many-branches
+        R0911,  # too-many-return-statements
+        R0902,  # too-many-instance-attributes
+        R0904,  # too-many-public-methods
+        R0916,  # too-many-boolean-expressions
+        R0917,  # too-many-statements
+        R0918,  # too-many-nested-blocks
+        R0919,  # too-many-ancestors
+        R0920,  # too-many-ancestors
+        R0921,  # too-many-ancestors
+        R0922,  # too-many-ancestors
+        R0923,  # too-many-ancestors
+        R0924,  # too-many-ancestors
+        R0925,  # too-many-ancestors
+        R0926,  # too-many-ancestors
+        R0927,  # too-many-ancestors
+        R0928,  # too-many-ancestors
+        R0929,  # too-many-ancestors
+        R0930,  # too-many-ancestors
+        R0931,  # too-many-ancestors
+        R0932,  # too-many-ancestors
+        R0933,  # too-many-ancestors
+        R0934,  # too-many-ancestors
+        R0935,  # too-many-ancestors
+        R0936,  # too-many-ancestors
+        R0937,  # too-many-ancestors
+        R0938,  # too-many-ancestors
+        R0939,  # too-many-ancestors
+        R0940,  # too-many-ancestors
+        R0941,  # too-many-ancestors
+        R0942,  # too-many-ancestors
+        R0943,  # too-many-ancestors
+        R0944,  # too-many-ancestors
+        R0945,  # too-many-ancestors
+        R0946,  # too-many-ancestors
+        R0947,  # too-many-ancestors
+        R0948,  # too-many-ancestors
+        R0949,  # too-many-ancestors
+        R0950,  # too-many-ancestors
+        R0951,  # too-many-ancestors
+        R0952,  # too-many-ancestors
+        R0953,  # too-many-ancestors
+        R0954,  # too-many-ancestors
+        R0955,  # too-many-ancestors
+        R0956,  # too-many-ancestors
+        R0957,  # too-many-ancestors
+        R0958,  # too-many-ancestors
+        R0959,  # too-many-ancestors
+        R0960,  # too-many-ancestors
+        R0961,  # too-many-ancestors
+        R0962,  # too-many-ancestors
+        R0963,  # too-many-ancestors
+        R0964,  # too-many-ancestors
+        R0965,  # too-many-ancestors
+        R0966,  # too-many-ancestors
+        R0967,  # too-many-ancestors
+        R0968,  # too-many-ancestors
+        R0969,  # too-many-ancestors
+        R0970,  # too-many-ancestors
+        R0971,  # too-many-ancestors
+        R0972,  # too-many-ancestors
+        R0973,  # too-many-ancestors
+        R0974,  # too-many-ancestors
+        R0975,  # too-many-ancestors
+        R0976,  # too-many-ancestors
+        R0977,  # too-many-ancestors
+        R0978,  # too-many-ancestors
+        R0979,  # too-many-ancestors
+        R0980,  # too-many-ancestors
+        R0981,  # too-many-ancestors
+        R0982,  # too-many-ancestors
+        R0983,  # too-many-ancestors
+        R0984,  # too-many-ancestors
+        R0985,  # too-many-ancestors
+        R0986,  # too-many-ancestors
+        R0987,  # too-many-ancestors
+        R0988,  # too-many-ancestors
+        R0989,  # too-many-ancestors
+        R0990,  # too-many-ancestors
+        R0991,  # too-many-ancestors
+        R0992,  # too-many-ancestors
+        R0993,  # too-many-ancestors
+        R0994,  # too-many-ancestors
+        R0995,  # too-many-ancestors
+        R0996,  # too-many-ancestors
+        R0997,  # too-many-ancestors
+        R0998,  # too-many-ancestors
+        R0999,  # too-many-ancestors
+
+[FORMAT]
+# Maximum number of characters on a single line
+max-line-length=100
+
+# Maximum number of lines in a module
+max-module-lines=2000
+
+# String used as indentation unit
+indent-string='    '
+
+[BASIC]
+# Regular expression which should only match function or class names
+function-rgx=[a-z_][a-z0-9_]{2,50}$
+class-rgx=[A-Z_][a-zA-Z0-9_]+$
+
+# Regular expression which should only match correct module names
+module-rgx=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
+
+# Regular expression which should only match correct variable names
+variable-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# Regular expression which should only match correct constant names
+const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
+
+# Regular expression which should only match correct attribute names
+attr-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# Regular expression which should only match correct argument names
+argument-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# Regular expression which should only match correct class attribute names
+class-attribute-rgx=([A-Za-z_][A-Za-z0-9_]{2,30}|(__.*__))$
+
+# Regular expression which should only match correct inline iteration names
+inlinevar-rgx=[A-Za-z_][A-Za-z0-9_]*$
+
+# Regular expression which should only match correct class names
+class-rgx=[A-Z_][a-zA-Z0-9_]+$
+
+# Regular expression which should only match correct module names
+module-rgx=(([a-z_][a-z0-9_]*)|([A-Z][a-zA-Z0-9]+))$
+
+# Regular expression which should only match correct method names
+method-rgx=[a-z_][a-z0-9_]{2,50}$
+
+# Regular expression which should only match correct function names
+function-rgx=[a-z_][a-z0-9_]{2,50}$
+
+# Regular expression which should only match correct variable names
+variable-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# Regular expression which should only match correct constant names
+const-rgx=(([A-Z_][A-Z0-9_]*)|(__.*__))$
+
+# Regular expression which should only match correct attribute names
+attr-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# Regular expression which should only match correct argument names
+argument-rgx=[a-z_][a-z0-9_]{2,30}$
+
+# Regular expression which should only match correct class attribute names
+class-attribute-rgx=([A-Za-z_][A-Za-z0-9_]{2,30}|(__.*__))$
+
+# Regular expression which should only match correct inline iteration names
+inlinevar-rgx=[A-Za-z_][A-Za-z0-9_]*$
+
+[DESIGN]
+# Maximum number of arguments for function / method
+max-args=10
+
+# Maximum number of attributes for a class
+max-attributes=15
+
+# Maximum number of public methods for a class
+max-public-methods=20
+
+# Maximum number of return statements for function / method body
+max-returns=6
+
+# Maximum number of statements in function / method body
+max-statements=50
+
+# Maximum number of parents for a class
+max-parents=7
+
+# Maximum number of attributes for a class
+max-attributes=15
+
+# Maximum number of public methods for a class
+max-public-methods=20
+
+# Maximum number of return statements for function / method body
+max-returns=6
+
+# Maximum number of statements in function / method body
+max-statements=50
+
+# Maximum number of parents for a class
+max-parents=7
+
+[SIMILARITIES]
+# Minimum lines number of a similarity
+min-similarity-lines=4
+
+# Ignore imports when computing similarities
+ignore-imports=yes
+
+# Ignore docstrings when computing similarities
+ignore-docstrings=yes
+
+# Ignore comments when computing similarities
+ignore-comments=yes
+
+[TYPECHECK]
+# List of module names for which member attributes should not be checked
+ignored-modules=numpy,tensorflow,torch,cv2,PIL
+
+# List of classes names for which member attributes should not be checked
+ignored-classes=SQLObject
+
+# List of module names for which member attributes should not be checked
+ignored-modules=numpy,tensorflow,torch,cv2,PIL
+
+# List of classes names for which member attributes should not be checked
+ignored-classes=SQLObject
+
+[VARIABLES]
+# A regular expression matching the name of dummy variables
+dummy-variables-rgx=_$|dummy
+
+# List of additional names considered to be builtins
+additional-builtins=
+
+# List of strings which can identify a callback function by name
+callbacks=cb_,_cb
+
+# Tells whether we should check for unused import in __init__ files
+init-import=no
+
+# A regular expression matching the name of dummy variables
+dummy-variables-rgx=_$|dummy
+
+# List of additional names considered to be builtins
+additional-builtins=
+
+# List of strings which can identify a callback function by name
+callbacks=cb_,_cb
+
+# Tells whether we should check for unused import in __init__ files
+init-import=no
+
+[CLASSES]
+# List of interface methods to ignore
+ignore-iface-methods=isImplementedBy,deferred,extends,names,namesAndDescriptions,queryDescriptionFor,getBases,getDescriptionFor,getDoc,getName,getTaggedValue,getTaggedValueTags,isEqualOrExtendedBy,setTaggedValue,isImplementedByInstancesOf,adaptWith,is_implemented_by
+
+# List of method names used to declare (i.e. assign) instance attributes
+defining-attr-methods=__init__,__new__,setUp
+
+# List of valid names for the first argument in a class method
+valid-classmethod-first-arg=cls
+
+# List of valid names for the first argument in a metaclass class method
+valid-metaclass-classmethod-first-arg=mcs
+
+# List of method names used to declare (i.e. assign) instance attributes
+defining-attr-methods=__init__,__new__,setUp
+
+# List of valid names for the first argument in a class method
+valid-classmethod-first-arg=cls
+
+# List of valid names for the first argument in a metaclass class method
+valid-metaclass-classmethod-first-arg=mcs
+
+[IMPORTS]
+# Deprecated modules which should not be used, separated by a comma
+deprecated-modules=regsub,TERMIOS,Bastion,rexec
+
+# Create a graph of every (i.e. internal and external) dependencies in the
+# given file (report RP0402 must not be disabled)
+import-graph=
+
+# Create a graph of external dependencies in the given file (report RP0402 must
+# not be disabled)
+ext-import-graph=
+
+# Create a graph of internal dependencies in the given file (report RP0402 must
+# not be disabled)
+int-import-graph=
+
+# Force import order to recognize a module as part of a third party library
+known-third-party=enchant
+
+# Analyse import fallback blocks
+analyse-fallback-blocks=no
+
+# Deprecated modules which should not be used, separated by a comma
+deprecated-modules=regsub,TERMIOS,Bastion,rexec
+
+# Create a graph of every (i.e. internal and external) dependencies in the
+# given file (report RP0402 must not be disabled)
+import-graph=
+
+# Create a graph of external dependencies in the given file (report RP0402 must
+# not be disabled)
+ext-import-graph=
+
+# Create a graph of internal dependencies in the given file (report RP0402 must
+# not be disabled)
+int-import-graph=
+
+# Force import order to recognize a module as part of a third party library
+known-third-party=enchant
+
+# Analyse import fallback blocks
+analyse-fallback-blocks=no
+
+[EXCEPTIONS]
+# Exceptions that will emit a warning when being caught
+overgeneral-exceptions=Exception 
