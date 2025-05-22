@@ -32,11 +32,13 @@ jobs:
         echo "class WLAN: pass" > mocks/network.py
         echo "class Pin: pass" > mocks/machine.py
         echo "def request(*args, **kwargs): return type('Response', (), {'text': '{}'})" > mocks/urequests.py
+        echo "def dumps(obj): return str(obj)" > mocks/ujson.py
+        echo "def loads(s): return eval(s)" >> mocks/ujson.py
         export PYTHONPATH=$PYTHONPATH:$(pwd)/mocks
         
     - name: Lint with pylint
       run: |
-        pylint --rcfile=.pylintrc $(git ls-files '*.py')
+        pylint --rcfile=.pylintrc --ignore=mocks $(git ls-files '*.py')
         
     - name: Test with pytest
       run: |
