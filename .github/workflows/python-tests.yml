@@ -31,13 +31,15 @@ jobs:
     - name: Create MicroPython mock modules
       run: |
         mkdir -p mocks
-        echo "class WLAN: pass" > mocks/network.py
-        echo "STA_IF = 'STA_IF'" >> mocks/network.py
-        echo "def active(self, value): pass" >> mocks/network.py
-        echo "def isconnected(self): return True" >> mocks/network.py
-        echo "def connect(self, ssid, password): pass" >> mocks/network.py
-        echo "def ifconfig(self): return ('192.168.1.1', '255.255.255.0', '192.168.1.1', '8.8.8.8')" >> mocks/network.py
-        echo "def scan(self): return [('SSID1', '00:11:22:33:44:55', 1, 1, 1, 1)]" >> mocks/network.py
+        cat <<EOF > mocks/network.py
+class WLAN:
+    def active(self, value): pass
+    def isconnected(self): return True
+    def connect(self, ssid, password): pass
+    def ifconfig(self): return ('192.168.1.1', '255.255.255.0', '192.168.1.1', '8.8.8.8')
+    def scan(self): return [(b'SSID1', b'\x00\x11\x22\x33\x44\x55', 1, -50, 0, 0)]
+STA_IF = 'STA_IF'
+EOF
         echo "class Pin: pass" > mocks/machine.py
         echo "def reset(): pass" >> mocks/machine.py
         echo "def request(*args, **kwargs): return type('Response', (), {'text': '{}', 'status_code': 200, 'close': lambda: None})" > mocks/urequests.py
