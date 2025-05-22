@@ -44,6 +44,7 @@ jobs:
         echo "def post(*args, **kwargs): return type('Response', (), {'text': '{}', 'status_code': 200, 'close': lambda: None})" >> mocks/urequests.py
         echo "def dumps(obj): return str(obj)" > mocks/ujson.py
         echo "def loads(s): return eval(s)" >> mocks/ujson.py
+        echo "def load(f): return eval(f.read())" >> mocks/ujson.py
         
     - name: Lint with pylint
       run: |
