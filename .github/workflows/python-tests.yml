@@ -26,6 +26,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         
+    - name: Create MicroPython mock modules
+      run: |
+        mkdir -p mocks
+        echo "class WLAN: pass" > mocks/network.py
+        echo "class Pin: pass" > mocks/machine.py
+        echo "def request(*args, **kwargs): return type('Response', (), {'text': '{}'})" > mocks/urequests.py
+        export PYTHONPATH=$PYTHONPATH:$(pwd)/mocks
+        
     - name: Lint with pylint
       run: |
         pylint --rcfile=.pylintrc $(git ls-files '*.py')
