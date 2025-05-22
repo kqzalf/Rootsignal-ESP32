@@ -1,0 +1,5 @@
+{
+  "slack_webhook": "https://hooks.slack.com/services/your/webhook/url",
+  "system_name": "rootsignal-esp32",
+  "signal_threshold": -80
+}
