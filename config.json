@@ -1,5 +1,12 @@
 {
   "slack_webhook": "https://hooks.slack.com/services/your/webhook/url",
   "system_name": "rootsignal-esp32",
-  "signal_threshold": -80
+  "signal_threshold": -80,
+  "wifi_ssid": "YOUR_WIFI_SSID",
+  "wifi_password": "YOUR_WIFI_PASSWORD",
+  "scan_interval": 30,
+  "mac_flood_threshold": 50,
+  "deauth_threshold": 5,
+  "signal_drop_threshold": 20,
+  "log_level": "INFO"
 }
