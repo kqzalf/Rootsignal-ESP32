@@ -32,8 +32,11 @@ jobs:
       run: |
         mkdir -p mocks
         echo "class WLAN: pass" > mocks/network.py
+        echo "STA_IF = 'STA_IF'" >> mocks/network.py
         echo "class Pin: pass" > mocks/machine.py
+        echo "def reset(): pass" >> mocks/machine.py
         echo "def request(*args, **kwargs): return type('Response', (), {'text': '{}'})" > mocks/urequests.py
+        echo "def post(*args, **kwargs): return type('Response', (), {'text': '{}'})" >> mocks/urequests.py
         echo "def dumps(obj): return str(obj)" > mocks/ujson.py
         echo "def loads(s): return eval(s)" >> mocks/ujson.py
         
