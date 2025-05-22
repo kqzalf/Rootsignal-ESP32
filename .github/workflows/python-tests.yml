@@ -12,6 +12,8 @@ jobs:
     strategy:
       matrix:
         python-version: [3.8, 3.9]
+    env:
+      PYTHONPATH: ${{ github.workspace }}/mocks
 
     steps:
     - uses: actions/checkout@v3
@@ -34,7 +36,6 @@ jobs:
         echo "def request(*args, **kwargs): return type('Response', (), {'text': '{}'})" > mocks/urequests.py
         echo "def dumps(obj): return str(obj)" > mocks/ujson.py
         echo "def loads(s): return eval(s)" >> mocks/ujson.py
-        export PYTHONPATH=$PYTHONPATH:$(pwd)/mocks
         
     - name: Lint with pylint
       run: |
